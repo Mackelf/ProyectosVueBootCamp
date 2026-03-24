@@ -1,0 +1,13 @@
+.weather-card {
+  &.theme-day {
+    background: $card-bg-day;
+  }
+
+  &.theme-afternoon {
+    background: $card-bg-afternoon;
+  }
+
+  &.theme-night {
+    background: $card-bg-night;
+  }
+}
