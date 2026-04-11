@@ -1,0 +1,7 @@
+{
+  "frameworks": [
+    { "id": 1, "name": "Vue.js", "description": "Framework progresivo para interfaces." },
+    { "id": 2, "name": "React", "description": "Librería para construir interfaces." },
+    { "id": 3, "name": "Angular", "description": "Framework completo mantenido por Google." }
+  ]
+}
