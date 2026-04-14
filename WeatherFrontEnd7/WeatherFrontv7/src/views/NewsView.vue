@@ -11,7 +11,8 @@ async function loadNews() {
     isLoading.value = true;
     error.value = null;
     const data = await getLatamWeatherNewsEverything();
-    articles.value = data;
+    // limitar para la UI (ej. primeras 12)
+    articles.value = data.slice(0, 12);
   } catch (e) {
     error.value = e.message || 'Error cargando noticias';
   } finally {
@@ -64,3 +65,4 @@ onMounted(loadNews);
     </div>
   </section>
 </template>
+
