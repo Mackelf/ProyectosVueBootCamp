@@ -5,19 +5,30 @@ import { formatTempValue, getTempSuffix } from '@/utils/temperature';
 
 const props = defineProps({
   city: { type: String, required: true },
-  dateLabel: { type: String, required: true },      // 18-MAR
-  description: { type: String, required: true },    // DESPEJADO
-  temperature: { type: Number, required: true },    // temp actual (siempre en °C)
+  dateLabel: { type: String, required: true },
+  description: { type: String, required: true },
+  temperature: { type: Number, required: true },
   minTemp: { type: Number, required: true },
   maxTemp: { type: Number, required: true },
-  iconClass: { type: String, required: true },      // bi bi-sun-fill
+  iconClass: { type: String, required: true },
   theme: { type: String, default: 'theme-day' },
+  // nuevos
+  isFavorite: { type: Boolean, default: false },
+  showFavorite: { type: Boolean, default: false },
+  dotColor: {
+    type: String,
+    default: 'rgba(255, 255, 255, 0.7)',
+  },
 });
 
-const emit = defineEmits(['show-details']);
+const emit = defineEmits(['show-details', 'toggle-favorite']);
 
 function onShowDetails() {
   emit('show-details');
+}
+
+function onToggleFavorite() {
+  emit('toggle-favorite');
 }
 
 // ---- preferencias desde Vuex ----
@@ -27,7 +38,6 @@ const unit = computed(() => prefs.value.unit || 'C');
 
 const tempSuffix = computed(() => getTempSuffix(unit.value));
 
-// Valores ya formateados para mostrar
 const tempNowFormatted = computed(() =>
   formatTempValue(props.temperature, unit.value)
 );
@@ -42,7 +52,7 @@ const maxTempFormatted = computed(() =>
 <template>
   <article class="card weather-card" :class="theme">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <span class="weather-dot"></span>
+      <span class="weather-dot" :style="{ backgroundColor: dotColor }" />
       <span class="text-uppercase">{{ city }}</span>
       <span class="small text-uppercase">{{ dateLabel }}</span>
     </div>
@@ -61,17 +71,31 @@ const maxTempFormatted = computed(() =>
     </div>
 
     <div class="temp-range d-flex justify-content-between mt-2 small">
-      <span class="temp-min">
-        ↓ {{ minTempFormatted }}{{ tempSuffix }}
-      </span>
-      <span class="temp-max">
-        ↑ {{ maxTempFormatted }}{{ tempSuffix }}
-      </span>
+      <span class="temp-min">↓ {{ minTempFormatted }}{{ tempSuffix }}</span>
+      <span class="temp-max">↑ {{ maxTempFormatted }}{{ tempSuffix }}</span>
     </div>
 
-    <button class="btn btn-detalles mt-3" @click="onShowDetails">
-      Detalles &gt;
-    </button>
+    <!-- Footer: estrella izquierda, detalles derecha -->
+    <div class="d-flex justify-content-between align-items-center mt-3">
+
+      <button
+        v-if="showFavorite"
+        class="favorite-btn"
+        :class="{ 'is-favorite': isFavorite }"
+        :title="isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+        @click.stop="onToggleFavorite"
+      >
+        <i :class="isFavorite ? 'bi bi-star-fill' : 'bi bi-star'"></i>
+      </button>
+
+      <!-- placeholder para mantener el layout cuando no hay estrella -->
+      <span v-else></span>
+
+      <button class="btn btn-detalles" @click="onShowDetails">
+        Detalles &gt;
+      </button>
+
+    </div>
   </article>
 </template>
 

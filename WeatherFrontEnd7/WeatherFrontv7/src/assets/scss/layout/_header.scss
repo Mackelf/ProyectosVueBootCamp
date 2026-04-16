@@ -1,5 +1,67 @@
-.header {
-  &__title {
+// scss/layout/_header.scss
+
+.navbar {
+  // 1. Usamos las variables definidas en _theme.scss
+  background-color: var(--nav-bg) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--nav-border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  padding: 0.75rem 1rem;
+
+  // 2. Título o Logo
+  .navbar-brand, &__title {
+    color: var(--nav-text) !important;
     font-weight: 600;
+    transition: color 0.3s ease;
   }
+
+  // 3. Enlaces de navegación
+  .nav-link {
+    color: var(--nav-text) !important;
+    font-size: 0.95rem;
+    transition: color 0.3s ease, opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &.active {
+      font-weight: 600;
+      border-bottom: 2px solid var(--card-link);
+    }
+  }
+
+  // 4. Texto de bienvenida y otros elementos
+  .user-welcome-text {
+    color: var(--nav-text);
+    font-size: 0.9rem;
+  }
+}
+
+.btn-danger {
+    // Puedes mantenerlo rojo, pero asegúrate de que el margen sea correcto
+    margin-left: 10px;
+  }
+
+  // scss/layout/_header.scss
+
+.btn-nav-auth {
+  // Usamos el contrato de variables que definimos antes
+  border: 1px solid var(--nav-btn-border) !important;
+  color: var(--nav-btn-text) !important;
+  background: transparent;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--nav-btn-border);
+    // Invertimos el color del texto al pasar el mouse
+    .app-theme-light & { color: #ffffff !important; }
+    .app-theme-dark & { color: #050816 !important; }
+  }
+}
+
+.nav-user-greeting {
+  // El saludo ahora cambiará de blanco a oscuro automáticamente
+  color: var(--nav-text) !important;
+  font-weight: 500;
 }

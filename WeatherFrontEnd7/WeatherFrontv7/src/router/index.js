@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router'; // 1. cambiar createWebHistory por createWebHashHistory
 import store from '../store';
 
 import HomeView from '../views/HomeView.vue';
@@ -7,13 +7,13 @@ import LugarDetalleView from '../views/LugarDetalleView.vue';
 import NewsView from '../views/NewsView.vue';
 import AboutView from '../views/AboutView.vue';
 
-// nuevas vistas para auth
 import LoginView from '../views/LoginView.vue';
 import FavoritesView from '../views/FavoritesView.vue';
 import PreferencesView from '../views/PreferencesView.vue';
+import RegisterView from '../views/RegisterView.vue';
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(), // 2. usar createWebHashHistory() sin parámetros
   routes: [
     {
       path: '/',
@@ -41,14 +41,17 @@ const router = createRouter({
       name: 'about',
       component: AboutView,
     },
-
-    // ---------- auth ----------
     {
       path: '/login',
       name: 'login',
       component: LoginView,
     },
     {
+      path: '/registro',
+      name: 'registro',
+      component: RegisterView,
+    },
+        {
       path: '/favoritos',
       name: 'favoritos',
       component: FavoritesView,
@@ -72,7 +75,6 @@ router.beforeEach((to, from) => {
     return { name: 'login', query: { redirect: to.fullPath } };
   }
 
-  // si no devolvemos nada, la navegación continúa
   return true;
 });
 

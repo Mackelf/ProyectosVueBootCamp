@@ -1,0 +1,69 @@
+{
+  "swot": {
+    "strengths": [
+      "Resolución De Problemas Técnicos En Terreno, Con Una Tasa De Éxito Del 90%",
+      "Mentoría",
+      "Capacitación",
+      "Trabajo En Equipo",
+      "Adaptabilidad",
+      "Soporte Remoto",
+      "Configuración De Router",
+      "Configuración De Equipos De Comunicación: Switches, Router",
+      "Diagnóstico Avanzado De Pérdida De Enlace En Conexiones De Fibra",
+      "Documentación",
+      "Ticketing"
+    ],
+    "weaknesses": [
+      "Falta experiencia/certificación en Cloud (AWS/Azure)",
+      "Sin scripting/automatización básica (Python/PowerShell)",
+      "Sin certificaciones IT vigentes (ITIL, Network+, etc.)",
+      "Inglés técnico por debajo de B2 (límite para multinacionales)"
+    ],
+    "opportunities": [
+      "Alta demanda de Soporte IT N2 y roles híbridos/remotos",
+      "Certificaciones rápidas con alto ROI (ITIL 4, AWS/Azure Fundamentals)",
+      "Sectores en digitalización acelerada: salud, fintech, gobierno, telecom",
+      "Transición a roles de administración de redes o Cloud Support L1"
+    ],
+    "threats": [
+      "Automatización e IA reduciendo soporte L1 tradicional",
+      "Competencia con perfiles jóvenes + certificaciones cloud/ciberseguridad",
+      "Obsolescencia de stacks puramente hardware/on-premise",
+      "Requisitos crecientes de inglés técnico B2+ en empresas globales"
+    ],
+    "metadata": {
+      "analyzed_at": "2026-04-14T23:46:32.961476"
+    }
+  },
+  "learning_plan": [
+    {
+      "focus": "Cloud Fundamentals",
+      "course": "AWS Cloud Practitioner / Azure Fundamentals",
+      "timeframe": "2 meses",
+      "validation": "Certificación oficial + lab básico"
+    },
+    {
+      "focus": "Automatización IT",
+      "course": "Python/PowerShell para SysAdmins",
+      "timeframe": "3 meses",
+      "validation": "3 scripts funcionales (ej: limpieza logs, reporte tickets)"
+    },
+    {
+      "focus": "Gestión de Servicios IT",
+      "course": "ITIL 4 Foundation",
+      "timeframe": "1-2 meses",
+      "validation": "Examen aprobado + badge digital"
+    },
+    {
+      "focus": "Inglés Técnico",
+      "course": "English for IT Professionals + práctica diaria",
+      "timeframe": "3-6 meses",
+      "validation": "Test EFSET B2 / entrevista simulada"
+    }
+  ],
+  "job_search_plan": {
+    "Días 1-30": "Optimizar CV/LinkedIn, mapear 3 roles objetivo, 10-15 postulaciones/semana, networking estratégico",
+    "Días 31-60": "Simulacros técnicos (STAR), CRM de seguimiento, 2 posts técnicos/mes en LinkedIn",
+    "Días 61-90": "Entrevistas reales, negociación salarial, preparación de onboarding, revisión trimestral FODA"
+  }
+}

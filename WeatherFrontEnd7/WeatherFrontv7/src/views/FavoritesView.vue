@@ -1,38 +1,67 @@
 <script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 const store = useStore();
+const router = useRouter();
 
-// getter que definimos en el módulo auth
-const favorites = computed(() => store.getters['auth/favorites']);
 const user = computed(() => store.getters['auth/currentUser']);
+const favorites = computed(() => store.getters['auth/favorites'] || []);
+
+const goToDetail = (city, country) => {
+  router.push(`/pronosticos/${country}/${city}`);
+};
+
+const removeFavorite = (city, country) => {
+  store.commit('auth/TOGGLE_FAVORITE', { city, country });
+};
 </script>
 
 <template>
   <section class="container py-4">
-    <h1 class="mb-3">Mis lugares favoritos</h1>
-
-    <p class="text-muted" v-if="user">
-      Usuario: <strong>{{ user.name }}</strong>
+    <h1 class="mb-1">Mis lugares favoritos</h1>
+    <p class="text-muted mb-4">
+      Bienvenido, <strong>{{ user?.name }}</strong>.
+      Tus ciudades guardadas aparecen aquí.
     </p>
 
-    <!-- Sin favoritos -->
-    <p v-if="!favorites || favorites.length === 0" class="text-muted">
-      No tienes lugares favoritos configurados.
-    </p>
+    <div v-if="favorites.length === 0" class="text-muted">
+      No tienes ciudades favoritas aún. Ve a
+      <router-link to="/pronosticos">Pronósticos</router-link>
+      y marca las que más te interesan con ⭐.
+    </div>
 
-    <!-- Lista de favoritos -->
-    <ul v-else class="list-group col-md-4">
-      <li
-        v-for="city in favorites"
-        :key="city"
-        class="list-group-item d-flex justify-content-between align-items-center"
+    <div v-else class="row g-3">
+      <div
+        v-for="fav in favorites"
+        :key="`${fav.country}-${fav.city}`"
+        class="col-sm-6 col-md-4 col-lg-3"
       >
-        <span>{{ city }}</span>
-        <!-- Aquí más adelante puedes poner un botón para ir al detalle -->
-        <!-- <RouterLink :to="...">Ver pronóstico</RouterLink> -->
-      </li>
-    </ul>
+        <div class="favorite-card">
+          <div class="favorite-card__body">
+            <p class="favorite-card__country small text-muted mb-1">
+              {{ fav.country === 'chile' ? '🇨🇱 Chile' : '🇦🇷 Argentina' }}
+            </p>
+            <h2 class="favorite-card__city h5 mb-3">{{ fav.city }}</h2>
+
+            <div class="d-flex gap-2">
+              <button
+                class="btn btn-sm btn-primary"
+                @click="goToDetail(fav.city, fav.country)"
+              >
+                Ver detalle
+              </button>
+              <button
+                class="btn btn-sm btn-outline-danger"
+                @click="removeFavorite(fav.city, fav.country)"
+              >
+                <i class="bi bi-star-fill"></i> Quitar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </template>

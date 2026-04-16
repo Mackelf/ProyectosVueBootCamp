@@ -4,11 +4,11 @@
   min-height: 260px;
   border-radius: 0.75rem;
   padding: 1.25rem 1.5rem 1.5rem;
-  color: $color-text;
+  color: var(--card-text-primary);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
-  border: 1px solid $color-border;
+border: 1px solid var(--card-border);
   background-color: transparent ! important;
 
   .card-header {
@@ -17,12 +17,12 @@
     padding: 0;
   }
 
-  .weather-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.7);
-  }
+ .weather-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.7); /* fallback */
+}
 
   .weather-main {
     margin-top: 0.75rem;
@@ -47,21 +47,73 @@
     margin-top: 0.25rem;
     font-size: 0.9rem;
     letter-spacing: 0.08em;
-    color: $color-text-muted;
+    color: var(--card-text-secondary);
   }
 
   .temp-range {
-    color: $color-text-muted;
+    color: var(--card-text-secondary);
   }
 
   .btn-detalles {
     align-self: flex-end;
     font-size: 0.8rem;
     padding-inline: 0;
-    color: $color-primary;
+    color: #2563eb !important;
 
     &:hover {
-      color: lighten($color-primary, 15%);
+      filter: brightness(1.2);
     }
+  }
+}
+.btn-favorite {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.2rem 0.4rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.35);
+  transition: color 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    color: #f59e0b;
+    transform: scale(1.2);
+  }
+
+  &.active {
+    color: #f59e0b;
+  }
+}
+
+/* scss/components/_weather-card.scss */
+.favorite-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  // Color por defecto (estrella vacía)
+  color: var(--fav-star-empty); 
+  font-size: 1.2rem;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.15);
+    color: var(--fav-star-full);
+  }
+
+  &.is-favorite {
+    color: var(--fav-star-full);
+    
+    // Sombra sutil para que resalte en el modo oscuro
+    .app-theme-dark & {
+      filter: drop-shadow(0 0 4px rgba(241, 196, 15, 0.3));
+    }
+  }
+
+  // Quitar el outline azul molesto de los botones en algunos navegadores
+  &:focus {
+    outline: none;
   }
 }
